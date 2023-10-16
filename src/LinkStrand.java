@@ -67,6 +67,12 @@ public class LinkStrand implements IDnaStrand{
             rev.mySize += newNode.info.length();
             current = current.next;
         }
+        rev.myLast = rev.myFirst;
+        rev.myAppends = myAppends;
+        rev.myIndex = 0;
+        rev.myLocalIndex = 0;
+        rev.myCurrent = rev.myFirst;
+        rev.mySize = mySize;
 
         return rev;
     }
