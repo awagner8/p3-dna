@@ -36,6 +36,8 @@ public class LinkStrand implements IDnaStrand{
         myLast = myFirst;
         mySize = source.length();
         myIndex = 0;
+        myLocalIndex = 0;
+        myCurrent = myFirst;
     }
 
     @Override
@@ -87,27 +89,45 @@ public class LinkStrand implements IDnaStrand{
 
     @Override
     public char charAt(int index) {
-        if (index < 0 || index >= mySize) {
-            throw new IndexOutOfBoundsException();
-        }
-        
-        if (index < myIndex) {
-            myIndex = 0;
-            myLocalIndex = 0;
-            myCurrent = myFirst;
-        }
-
-        while (myIndex != index) {
-            myIndex++;
-            myLocalIndex++;
-            if (myLocalIndex >= myCurrent.info.length()) {
-                myLocalIndex = 0;
-                myCurrent = myCurrent.next;
+        if(index>myIndex){
+            if(index>mySize-1){
+                throw new IndexOutOfBoundsException();
             }
-        }
+            int start = myIndex-myLocalIndex;
+            int stop = start + myCurrent.info.length();
+            while(start<index){
+                myLocalIndex = index - start;
+                myIndex++;
+                if(myLocalIndex>=myCurrent.info.length()){
+                    myLocalIndex = 0;
+                    myCurrent = myCurrent.next;
+                }
+                start = myIndex-myLocalIndex;
+            }
+            return myCurrent.info.charAt(myLocalIndex);
 
-        return myCurrent.info.charAt(myLocalIndex);
-        
+        }
+        else if(index<myIndex){
+            if(index<0){
+                throw new IndexOutOfBoundsException();
+            }
+            int start = myIndex-myLocalIndex;
+            int stop = start + myCurrent.info.length();
+            while(start>index){
+                myLocalIndex = index - start;
+                myIndex--;
+                if(myLocalIndex<0){
+                    myLocalIndex = myCurrent.info.length()-1;
+                    myCurrent = myCurrent.next;
+                }
+                start = myIndex-myLocalIndex;
+            }
+            return myCurrent.info.charAt(myLocalIndex);
+
+        }
+        else{
+            return myCurrent.info.charAt(myLocalIndex);
+        }
     }
 
 }
