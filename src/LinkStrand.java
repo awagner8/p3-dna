@@ -89,25 +89,23 @@ public class LinkStrand implements IDnaStrand{
 
     @Override
     public char charAt(int index) {
-        if (index>myIndex) {
-            if (index>mySize-1) {
+        if (index>mySize-1 || index<0) {
                 initialize(this.toString());
                 throw new IndexOutOfBoundsException();
             }
-            int currentStart = myIndex-myLocalIndex;
-            int currentFinish = currentStart+myCurrent.info.length()-1;
-            while (currentFinish<index) {
+        
+        if (index>myIndex) {
+            int start = myIndex-myLocalIndex;
+            int stop = start+myCurrent.info.length()-1;
+            while (stop<index) {
                 myCurrent=myCurrent.next;
-                myIndex= currentFinish+1;
+                myIndex= stop+1;
                 myLocalIndex=0;
-                currentStart=myIndex;
-                currentFinish=currentStart+myCurrent.info.length()-1;
+                start=myIndex;
+                stop=start+myCurrent.info.length()-1;
             }
-            return myCurrent.info.charAt(index-currentStart);
+            return myCurrent.info.charAt(index-start);
         } else if (index< myIndex){
-            if (index<0) {
-                throw new IndexOutOfBoundsException();
-            }
             int currentStart =0;
             int currentFinish = myFirst.info.length()-1;
             myCurrent=myFirst;
