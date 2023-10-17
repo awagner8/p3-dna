@@ -47,10 +47,10 @@ public class LinkStrand implements IDnaStrand{
 
     @Override
     public IDnaStrand append(String dna) {
-        myAppends++;
         myLast.next = new Node(dna);
         myLast = myLast.next;
         mySize += dna.length();
+        myAppends++;
         return this;
     }
 
