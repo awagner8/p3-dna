@@ -98,6 +98,49 @@ public class LinkStrand implements IDnaStrand{
                 throw new IndexOutOfBoundsException();
             }
         
+        if(index == myIndex){
+            return myCurrent.info.charAt(myLocalIndex);
+        }
+
+        /*if (index > myIndex) {
+            int difference = index - myIndex;
+            Node curr = myCurrent;
+
+            while (myCurrent.info.length() - myLocalIndex <= difference) {
+                difference -= myCurrent.info.length();
+                difference += myLocalIndex;
+                myLocalIndex = 0;
+                myCurrent = myCurrent.next;
+            }
+
+            if (curr == myCurrent) {
+                myLocalIndex += difference;
+                myIndex = index;
+                return myCurrent.info.charAt(myLocalIndex);
+            }
+
+            myIndex = index;
+            myLocalIndex = difference;
+            return myCurrent.info.charAt(myLocalIndex);
+        }
+
+        if (index < myIndex) {
+            myLocalIndex = 0;
+            int difference = index;
+            myCurrent = myFirst;
+
+            while (myCurrent.info.length() <= difference) {
+                difference -= myCurrent.info.length();
+                myCurrent = myCurrent.next;
+            }
+
+            myLocalIndex = difference;
+            myIndex = index;
+            return myCurrent.info.charAt(myLocalIndex);
+        }
+        return myCurrent.info.charAt(myLocalIndex);*/
+
+
         if (index>myIndex) {
             int start = myIndex-myLocalIndex;
             int stop = start+myCurrent.info.length()-1;
