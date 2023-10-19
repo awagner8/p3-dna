@@ -102,7 +102,7 @@ public class LinkStrand implements IDnaStrand{
             return myCurrent.info.charAt(myLocalIndex);
         }
 
-        /*if (index > myIndex) {
+        if (index > myIndex) {
             int difference = index - myIndex;
             Node curr = myCurrent;
 
@@ -138,10 +138,10 @@ public class LinkStrand implements IDnaStrand{
             myIndex = index;
             return myCurrent.info.charAt(myLocalIndex);
         }
-        return myCurrent.info.charAt(myLocalIndex);*/
+        return myCurrent.info.charAt(myLocalIndex);
 
 
-        if (index>myIndex) {
+        /*if (index>myIndex) {
             int start = myIndex-myLocalIndex;
             int stop = start+myCurrent.info.length()-1;
             while (stop<index) {
@@ -166,7 +166,7 @@ public class LinkStrand implements IDnaStrand{
             return myCurrent.info.charAt(index-currentStart);
         } else {
             return myCurrent.info.charAt(myLocalIndex);
-        }
+        }*/
 
     }
 
