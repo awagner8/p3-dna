@@ -103,70 +103,42 @@ public class LinkStrand implements IDnaStrand{
         }
 
         if (index > myIndex) {
-            int difference = index - myIndex;
+            int start = index - myIndex;
             Node curr = myCurrent;
 
-            while (myCurrent.info.length() - myLocalIndex <= difference) {
-                difference -= myCurrent.info.length();
-                difference += myLocalIndex;
+            while (myCurrent.info.length() - myLocalIndex <= start) {
+                start -= myCurrent.info.length();
+                start += myLocalIndex;
                 myLocalIndex = 0;
                 myCurrent = myCurrent.next;
             }
 
             if (curr == myCurrent) {
-                myLocalIndex += difference;
+                myLocalIndex += start;
                 myIndex = index;
                 return myCurrent.info.charAt(myLocalIndex);
             }
 
             myIndex = index;
-            myLocalIndex = difference;
+            myLocalIndex = start;
             return myCurrent.info.charAt(myLocalIndex);
         }
 
         if (index < myIndex) {
             myLocalIndex = 0;
-            int difference = index;
+            int start = index;
             myCurrent = myFirst;
 
-            while (myCurrent.info.length() <= difference) {
-                difference -= myCurrent.info.length();
+            while (myCurrent.info.length() <= start) {
+                start -= myCurrent.info.length();
                 myCurrent = myCurrent.next;
             }
 
-            myLocalIndex = difference;
+            myLocalIndex = start;
             myIndex = index;
             return myCurrent.info.charAt(myLocalIndex);
         }
         return myCurrent.info.charAt(myLocalIndex);
-
-
-        /*if (index>myIndex) {
-            int start = myIndex-myLocalIndex;
-            int stop = start+myCurrent.info.length()-1;
-            while (stop<index) {
-                myCurrent=myCurrent.next;
-                myIndex= stop+1;
-                myLocalIndex=0;
-                start=myIndex;
-                stop=start+myCurrent.info.length()-1;
-            }
-            return myCurrent.info.charAt(index-start);
-        } else if (index< myIndex){
-            int currentStart =0;
-            int currentFinish = myFirst.info.length()-1;
-            myCurrent=myFirst;
-            while (currentFinish<index) {
-                myCurrent=myCurrent.next;
-                myIndex= currentFinish+1;
-                myLocalIndex=0;
-                currentStart=myIndex;
-                currentFinish=currentStart+myCurrent.info.length()-1;
-            }
-            return myCurrent.info.charAt(index-currentStart);
-        } else {
-            return myCurrent.info.charAt(myLocalIndex);
-        }*/
 
     }
 
